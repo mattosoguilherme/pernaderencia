@@ -1,6 +1,13 @@
-require('dotenv').config()
-const { start } = require('./controllers/runner.controller')
+const express = require("express");
+const cors = require("cors");
 
-start()
-  .then(() => console.log('✅ Execução finalizada'))
-  .catch(err => console.error('❌ Erro geral:', err))
+const routes = require("./src/routers/index.routes");
+
+const app = express();
+
+app.use(cors());
+app.use(express.json());
+
+app.use("/api", routes);
+
+module.exports = app;
